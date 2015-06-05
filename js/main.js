@@ -43,5 +43,10 @@
 
 		window.transport = new window.Transport();
 		transport.togglePlayPause();
+    
+    document.addEventListener('keypress',function(deets){
+        if(deets.charCode===32) transport.togglePlayPause();
+    });
+    
     new DawUI().call();
 })();
