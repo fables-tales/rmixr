@@ -41,5 +41,7 @@
         respondToHashChange();
     },100);
 
+		window.transport = new window.Transport();
+		transport.togglePlayPause();
     new DawUI().call();
 })();

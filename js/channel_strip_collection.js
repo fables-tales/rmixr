@@ -46,6 +46,18 @@ window.ChannelStripCollection = (function() {
             }
         };
 
+				this.pauseAll = function(){
+						for(var i = 0; i < channelStrips.length; i++){
+							channelStrips[i].pause();
+						}
+				};
+
+				this.unpauseAll = function(){
+						for(var i = 0; i < channelStrips.length; i++){
+							channelStrips[i].unpause();
+						}
+				};
+
         function makeChannelStripsFromSources(audioSources) {
             var build = [];
             for (var i = 0; i < audioSources.length; i++) {
