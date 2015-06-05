@@ -18,8 +18,10 @@ window.SampleCreator = (function() {
         function buildAudioNodesForTags() {
             var build = [];
             for (var i = 0; i < tags.length; i++) {
-                build.push(window.audioContext.createMediaElementSource(tags[i]));
-            }
+                var mesn = window.audioContext.createMediaElementSource(tags[i]);
+								mesn.mediaElement = tags[i];
+								build.push(mesn);
+						}
             console.log(build);
 
             return build;
