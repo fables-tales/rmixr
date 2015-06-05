@@ -273,3 +273,15 @@ a {
     }
 }
 
+
+.effect-edit {
+    background-color:rgb(65, 70, 110);
+    border:1px solid rgb(85, 90, 120);
+    margin-left:30px;
+    padding:5px;
+}
+
+.effect-edit:hover {
+    background-color:rgb(75, 80, 120);
+    border:1px solid rgb(95, 100, 130);
+}

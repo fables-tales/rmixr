@@ -8,8 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <script src="js/effects-menu.js"></script>
-        <div class="pure-button primary-button" id="gain">Gain</div>
-        <div class="pure-button primary-button" id="three-band-eq">TBEQ</div>
+        <h1>Gain</h1>
+        <input type="range" min="0" max="100" style="transform:rotate(-90deg); margin-top:100px;" id="multiply">
+        <div class="value"></div>
+
+        <script src="/effect_templates/template_base.js"></script>
+        <script src="/effect_templates/gain.js"></script>
     </body>
 </html>

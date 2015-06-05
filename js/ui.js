@@ -16,8 +16,24 @@ window.DawUI = (function() {
                         addEffect(parsedMessage);
                         window.localStorage.setItem("rmixr-message", "");
                     }
+
+                    var effect_update = window.localStorage.getItem("update_effect");
+                    if (effect_update != "" && message != null) {
+                        var parsedMessage = JSON.parse(effect_update);
+                        console.log(parsedMessage);
+                        updateEffect(parsedMessage);
+                        window.localStorage.setItem("update_effect", "");
+                    }
                 },100);
             });
+        }
+
+        function updateEffect(message) {
+            var state = parseHash();
+            var ci = message.channel;
+            var ei = message.effectIndex;
+            state.channels[ci].effects[ei] = message.effect;
+            window.location.hash = JSON.stringify(state);
         }
 
         function addEffect(message) {
@@ -53,6 +69,15 @@ window.DawUI = (function() {
             return linkElement;
         }
 
+        function setupEffectEditHandler(link, channel, effectIndex) {
+            link.click(function() {
+                var state = parseHash();
+                var effectType = state.channels[channel].effects[effectIndex].name;
+                var effectParams = state.channels[channel].effects[effectIndex].params;
+                window.open("/effect_templates/" + effectType + ".html?channel=" + channel + "&position=" + effectIndex + "#" + JSON.stringify(effectParams), "MsgWindow" + Math.random(), "width=600, height=400");
+            });
+        };
+
         function showChannelStripSettings(channelIndex) {
             var state = parseHash();
             var channelState = state.channels[channelIndex];
@@ -60,11 +85,13 @@ window.DawUI = (function() {
             $("#effects-menu-list").empty();
             for (var i = 0; i < effects.length; i++) {
                 var effect = effects[i];
-                $("#effects-menu-list").append("<li class='pure-menu-item'><span class='pure-menu-link'>" + effect.name + "</span></li>");
+                var link = $("<li class='pure-menu-item'><span class='pure-menu-link'>" + effect.name + "<span class='effect-edit' id='effect-edit-" + channelIndex + '-' + i + "'><i class='fa fa-pencil'></i></span></span></li>");
+                setupEffectEditHandler(link, channelIndex, i);
+                $("#effects-menu-list").append(link);
             }
             var newEffectNode = $("<li class='pure-menu-item'><span class='pure-menu-link'>New effect</span></li>");
             $(newEffectNode).click(function() {
-                var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow", "width=200, height=300");
+                var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=200, height=300");
             });
             $("#effects-menu-list").append(newEffectNode);
         };
