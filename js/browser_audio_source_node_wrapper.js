@@ -14,7 +14,8 @@ window.BrowserAudioSourceNodeWrapper = (function() {
         }
 
         this.start = function() {
-            that.browserNode().mediaElement.play();
+            that.browserNode().mediaElement!=undefined?that.browserNode().mediaElement.play():that.browserNode().play();
+						console.log(that.browserNode());
         }
     }
 }());

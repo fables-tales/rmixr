@@ -15,7 +15,6 @@ window.ChannelStrip = (function() {
         };
 
         this.updateState = function(newChannelState) {
-            console.log(newChannelState);
             replaceEffects(newChannelState.effects);
         };
 
