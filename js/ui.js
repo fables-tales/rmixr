@@ -18,7 +18,7 @@ window.DawUI = (function() {
                     }
 
                     var effect_update = window.localStorage.getItem("update_effect");
-                    if (effect_update != "" && message != null) {
+                    if (effect_update != "" && effect_update != null) {
                         var parsedMessage = JSON.parse(effect_update);
                         updateEffect(parsedMessage);
                         window.localStorage.setItem("update_effect", "");
