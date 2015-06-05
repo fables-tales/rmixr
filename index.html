@@ -3,14 +3,49 @@
     <head>
         <title>Hi</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="/css/email.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.0/mustache.js"></script>
+
         <script type="text/javascript" src="js/effects_factory.js"></script>
         <script type="text/javascript" src="js/browser_effect_node_wrapper.js"></script>
         <script type="text/javascript" src="js/browser_audio_source_node_wrapper.js"></script>
         <script type="text/javascript" src="js/channel_strip.js"></script>
         <script type="text/javascript" src="js/browser_audio_sink.js"></script>
         <script type="text/javascript" src="js/channel_strip_collection.js"></script>
+        <script type="text/javascript" src="js/ui.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        <div id="layout" class="content pure-g">
+            <div id="nav" class="pure-u">
+                <a href="#" class="nav-menu-button">Menu</a>
+
+                <div class="nav-inner">
+                    <div class="pure-menu">
+                        <ul class="pure-menu-list" id="effects-menu-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="list" class="pure-u-1">
+            </div>
+
+            <div id="main" class="pure-u-1">
+                THIS IS THIS THING
+            </div>
+
+            <script type="text/template" id="template-channel">
+                <div class="email-item pure-g">
+                    <div class="pure-u">
+                        {{ title }}
+                    </div>
+                    <div class="pure-u-3-4">
+                    </div>
+                </div>
+            </script>
+        </div>
     </body>
 </html>
