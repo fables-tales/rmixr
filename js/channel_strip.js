@@ -11,8 +11,15 @@ window.ChannelStrip = (function() {
         this.runChain = function(newSink) {
             sink = newSink;
             source.connect(sink);
-            source.start();
         };
+
+				this.pause = function(){
+						source.pause();
+				}
+
+				this.unpause = function(){
+						source.unpause();
+				}
 
         this.updateState = function(newChannelState) {
             replaceEffects(newChannelState.effects);

@@ -14,8 +14,15 @@ window.BrowserAudioSourceNodeWrapper = (function() {
         }
 
         this.start = function() {
-            that.browserNode().mediaElement!=undefined?that.browserNode().mediaElement.play():that.browserNode().play();
-						console.log(that.browserNode());
+            that.browserNode().mediaElement.play();
         }
+
+				this.pause = function(){
+						that.browserNode().mediaElement.pause();
+				}
+
+				this.unpause = function(){
+						that.browserNode().mediaElement.play();
+				}
     }
 }());

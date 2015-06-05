@@ -18,8 +18,10 @@ window.SampleCreator = (function() {
         function buildAudioNodesForTags() {
             var build = [];
             for (var i = 0; i < tags.length; i++) {
-                build.push(window.audioContext.createMediaElementSource(tags[i]));
-            }
+                var mesn = window.audioContext.createMediaElementSource(tags[i]);
+								mesn.mediaElement = tags[i];
+								build.push(mesn);
+						}
             console.log(build);
 
             return build;
@@ -43,6 +45,18 @@ window.ChannelStripCollection = (function() {
                 channelStrips[i].updateState(newChannelState);
             }
         };
+
+				this.pauseAll = function(){
+						for(var i = 0; i < channelStrips.length; i++){
+							channelStrips[i].pause();
+						}
+				};
+
+				this.unpauseAll = function(){
+						for(var i = 0; i < channelStrips.length; i++){
+							channelStrips[i].unpause();
+						}
+				};
 
         function makeChannelStripsFromSources(audioSources) {
             var build = [];
