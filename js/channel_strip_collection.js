@@ -37,6 +37,13 @@ window.ChannelStripCollection = (function() {
             }
         };
 
+        this.updateState = function(newState) {
+            for (var i = 0; i < newState.channels.length; i++) {
+                var newChannelState = newState.channels[i];
+                channelStrips[i].updateState(newChannelState);
+            }
+        };
+
         function makeChannelStripsFromSources(audioSources) {
             var build = [];
             for (var i = 0; i < audioSources.length; i++) {

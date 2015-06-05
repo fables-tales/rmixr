@@ -1,15 +1,20 @@
 window.BrowserAudioSourceNodeWrapper = (function() {
     return function(audioSource) {
+        var that = this;
         this.browserNode = function() {
             return audioSource;
         }
 
         this.connect = function(other) {
-            audioSource.connect(other.browserNode());
+            that.browserNode().connect(other.browserNode());
+        }
+
+        this.disconnect = function() {
+            that.browserNode().disconnect();
         }
 
         this.start = function() {
-            audioSource.mediaElement.play();
+            that.browserNode().mediaElement.play();
         }
     }
 }());
