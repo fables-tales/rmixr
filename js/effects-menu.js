@@ -42,6 +42,14 @@
         sendLocalStorageItem(nodeDetails);
     }
 
+    function sendAddPanMessage(channel) {
+        var nodeDetails = {
+            effect: {"name": "stereoPan", "params": {"pan": 0.0}},
+            channel: channel
+        };
+        sendLocalStorageItem(nodeDetails);
+    }
+
     $(document).ready(function() {
         var channel = parseInt(QueryString.channel);
         $("#gain").click(function() {
@@ -51,6 +59,11 @@
 
         $("#three-band-eq").click(function() {
             sendAddTBEQ(channel);
+            close();
+        });
+
+        $("#pan").click(function(){
+            sendAddPanMessage(channel);
             close();
         });
     });
