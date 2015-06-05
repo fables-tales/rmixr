@@ -10,14 +10,13 @@ window.ChannelStrip = (function() {
 
         this.runChain = function(newSink) {
             sink = newSink;
-            establishConnections();
+            source.connect(sink);
             source.start();
         };
 
         this.updateState = function(newChannelState) {
             console.log(newChannelState);
             replaceEffects(newChannelState.effects);
-            establishConnections();
         };
 
         function disconnectAllEffects() {
@@ -29,27 +28,23 @@ window.ChannelStrip = (function() {
         }
 
         function replaceEffects(effectState) {
-            var newEffects = [];
+            sink.disconnect();
+            source.disconnect();
+            var nextSource = source.browserNode();
+
             for (var i = 0; i < effectState.length; i++) {
-                newEffects.push(effectsFactory.call(effectState[i]));
+                var nextSink = audioContext.createGain();
+                nextSink.gain.value = 1.0;
+                effectsFactory.call(nextSource, nextSink, effectState[i]);
+                nextSource = nextSink;
             }
 
-            effects = newEffects;
+            nextSource.connect(sink.browserNode());
         }
 
         var tgain = 1;
 
         function establishConnections() {
-            var node = source;
-            node.disconnect();
-            sink.disconnect();
-            console.warn(effects);
-            for (var i = 0; i < effects.length; i++) {
-                var newNode = effects[i];
-                node.connect(newNode);
-                node = newNode;
-            }
-            node.connect(sink);
         }
     };
 }());

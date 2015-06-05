@@ -1,11 +1,11 @@
 window.BrowserEffectNodeWrapper = (function() {
     return function(browserEffectNode) {
-        this.browserNode = function() {
-            return browserEffectNode;
+        this.setInputNode = function(node) {
+            node.connect(browserEffectNode);
         }
 
-        this.connect = function(node) {
-            this.browserNode().connect(node.browserNode());
+        this.connectToOutputNode = function(node) {
+            browserEffectNode.connect(node);
         };
 
         this.disconnect = function() {
