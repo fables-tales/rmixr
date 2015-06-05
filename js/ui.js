@@ -10,11 +10,11 @@ window.DawUI = (function() {
                 initUI();
 
                 setInterval(function() {
-                    var message = window.localStorage.getItem("message");
+                    var message = window.localStorage.getItem("rmixr-message");
                     if (message != "") {
                         var parsedMessage = JSON.parse(message);
                         addEffect(parsedMessage);
-                        window.localStorage.setItem("message", "");
+                        window.localStorage.setItem("rmixr-message", "");
                     }
                 },100);
             });

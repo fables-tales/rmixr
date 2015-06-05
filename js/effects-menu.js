@@ -23,7 +23,7 @@
     }();
 
     function sendLocalStorageItem(item) {
-        window.localStorage.setItem("message", JSON.stringify(item));
+        window.localStorage.setItem("rmixr-message", JSON.stringify(item));
     }
 
     function sendAddGainNodeMessage(channel) {
