@@ -5,7 +5,11 @@ window.BrowserAudioSink = (function() {
         };
 
         this.disconnect = function() {
-            this.browserNode().disconnect();
+            try{
+                this.browserNode().disconnect();
+            } catch (e){
+                console.log("tried to disconnect an something that wasn't connected");
+            }
         }
     };
 })();
