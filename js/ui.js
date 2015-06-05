@@ -11,7 +11,7 @@ window.DawUI = (function() {
 
                 setInterval(function() {
                     var message = window.localStorage.getItem("rmixr-message");
-                    if (message != "") {
+                    if (message != "" && message != null) {
                         var parsedMessage = JSON.parse(message);
                         addEffect(parsedMessage);
                         window.localStorage.setItem("rmixr-message", "");
