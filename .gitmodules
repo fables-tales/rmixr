@@ -1,0 +1,3 @@
+[submodule "js/tuna"]
+	path = js/tuna
+	url = git@github.com:Dinahmoe/tuna.git
