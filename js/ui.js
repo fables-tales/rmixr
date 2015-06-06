@@ -72,7 +72,7 @@ window.DawUI = (function() {
                 }
             });
 
-            $(".playhead").mousedown(function() {
+            $("#main").mousedown(function() {
                 window.headClicked = true;
                 window.transport.pause();
             });
@@ -91,7 +91,7 @@ window.DawUI = (function() {
                 }
             });
 
-            $(".playhead").mouseup(function() {
+            $("#main").mouseup(function() {
                 window.headClicked = false;
                 window.transport.play();
                 setTimeout(function() { window.transport.setAudioTime(newTime); }, 16);
