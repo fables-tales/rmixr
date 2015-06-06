@@ -29,6 +29,16 @@ window.DawUI = (function() {
                         var height = amplitude*1000+10;
                         $("#amplitude").height(height);
                     }
+
+                    $("#currentTime").text(window.transport.audioTime());
+
+                    var alongness = window.transport.audioTime()/window.transport.duration();
+                    var width = $("#main").width();
+                    $(".playhead").css({"left": width*alongness + "px"});
+                    if (window.transport.audioTime() >= window.transport.duration()) {
+                        window.transport.reset();
+                        $("#playPause").html("<i class='fa fa-play'></i>");
+                    }
                 },16);
             });
         }
