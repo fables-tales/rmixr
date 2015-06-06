@@ -42,6 +42,10 @@ body {
 
 .pure-menu-item {
     border-bottom:1px solid rgb(222,222,222);
+    border-top:1px solid rgb(222,222,222);
+    margin-top:-1px !important;
+    border-right:1px solid;
+    margin-right:-1px !important;
     padding-top:1.5em;
     padding-bottom:1.5em;
     padding-left:.5em;
@@ -50,9 +54,13 @@ body {
 
 .effect-edit {
     background-color:#152935;
-    margin-top:-8px;
     color:#fff;
     border-color:#4178BE;
+    margin-left: 10px;
+}
+
+.effect-edit-spacing {
+    margin-top:-8px;
 }
 
 .effect-edit:hover {
@@ -68,4 +76,16 @@ body {
     margin: 1.5em auto;
     transform: rotate(270deg);
     -moz-transform: rotate(270deg); /*do same for other browsers if required*/
-   }
+}
+
+#playPause {
+    font-size:2em;
+}
+
+#amplitude {
+    background-color:#fff;
+    position:absolute;
+    width:100%;
+    bottom:0px;
+    left:0px;
+}

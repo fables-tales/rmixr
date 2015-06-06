@@ -19,9 +19,9 @@ window.SampleCreator = (function() {
             var build = [];
             for (var i = 0; i < tags.length; i++) {
                 var mesn = window.audioContext.createMediaElementSource(tags[i]);
-								mesn.mediaElement = tags[i];
-								build.push(mesn);
-						}
+                mesn.mediaElement = tags[i];
+                build.push(mesn);
+            }
             console.log(build);
 
             return build;
@@ -46,17 +46,21 @@ window.ChannelStripCollection = (function() {
             }
         };
 
-				this.pauseAll = function(){
-						for(var i = 0; i < channelStrips.length; i++){
-							channelStrips[i].pause();
-						}
-				};
+        this.pauseAll = function(){
+            for(var i = 0; i < channelStrips.length; i++){
+                channelStrips[i].pause();
+            }
+        };
 
-				this.unpauseAll = function(){
-						for(var i = 0; i < channelStrips.length; i++){
-							channelStrips[i].unpause();
-						}
-				};
+        this.unpauseAll = function(){
+            for(var i = 0; i < channelStrips.length; i++){
+                channelStrips[i].unpause();
+            }
+        };
+
+        this.getAmplitude = function(channel) {
+            return channelStrips[channel].getAmplitude();
+        }
 
         function makeChannelStripsFromSources(audioSources) {
             var build = [];

@@ -23,7 +23,11 @@ window.DawUI = (function() {
                         updateEffect(parsedMessage);
                         window.localStorage.setItem("update_effect", "");
                     }
-                },100);
+
+                    var amplitude = window.stripCollection.getAmplitude(window.currentChannelStrip);
+                    var height = amplitude*1000+10;
+                    $("#amplitude").height(height);
+                },16);
             });
         }
 
@@ -44,6 +48,14 @@ window.DawUI = (function() {
         }
 
         function initUI() {
+            $("#playPause").click(function() {
+                window.transport.togglePlayPause();
+                if (window.transport.playing) {
+                    $("#playPause").html("<i class='fa fa-pause'></i>");
+                } else {
+                    $("#playPause").html("<i class='fa fa-play'></i>");
+                }
+            });
             renderState(parseHash());
         };
 
@@ -65,16 +77,23 @@ window.DawUI = (function() {
                 });
                 $(this).addClass("email-item-selected");
                 showChannelStripSettings(index);
+                window.currentChannelStrip = index;
             });
             return linkElement;
         }
 
         function setupEffectEditHandler(link, channel, effectIndex) {
-            link.click(function() {
+            link.find(".btn-edit").click(function() {
                 var state = parseHash();
                 var effectType = state.channels[channel].effects[effectIndex].name;
                 var effectParams = state.channels[channel].effects[effectIndex].params;
                 window.open("/effect_templates/" + effectType + ".html?channel=" + channel + "&position=" + effectIndex + "#" + JSON.stringify(effectParams), "MsgWindow" + Math.random(), "width=600, height=400");
+            });
+            link.find(".btn-remove").click(function() {
+                var state = parseHash();
+                state.channels[channel].effects.splice(effectIndex, 1);
+                window.location.hash = JSON.stringify(state);
+                showChannelStripSettings(channel);
             });
         };
 
@@ -85,15 +104,36 @@ window.DawUI = (function() {
             $("#effects-menu-list").empty();
             for (var i = 0; i < effects.length; i++) {
                 var effect = effects[i];
-                var link = $("<li class='pure-menu-item'><span class='pure-menu-link'>" + effect.name + "<span class='effect-edit pull-right btn btn-small btn-default' id='effect-edit-" + channelIndex + '-' + i + "'><i class='fa fa-pencil'></i></span></span></li>");
+                var link = $(inflateTemplate("effect", effect));
                 setupEffectEditHandler(link, channelIndex, i);
                 $("#effects-menu-list").append(link);
             }
-            var newEffectNode = $("<li class='pure-menu-item'><span class='pure-menu-link'>New effect</span></li>");
+            $("#effects-menu-list").sortable({
+                axis: "y",
+                containment:"parent",
+                start: function(e, ui) {
+                    // creates a temporary attribute on the element with the old index
+                    $(this).attr('data-previndex', ui.item.index());
+                },
+                update: function(e, ui) {
+                    // gets the new and old index then removes the temporary attribute
+                    var newIndex = ui.item.index();
+                    var oldIndex = $(this).attr('data-previndex');
+                    $(this).removeAttr('data-previndex');
+                    var state = parseHash();
+                    var channelState = state.channels[channelIndex];
+                    var old = channelState.effects.splice(oldIndex, 1);
+                    channelState.effects.splice(newIndex, 0, old[0]);
+                    window.location.hash = JSON.stringify(state);
+                    showChannelStripSettings(channelIndex);
+                }
+            });
+
+            var newEffectNode = $("<li class='pure-menu-item'><span class='pure-menu-link'>New effect<span class='effect-edit effect-edit-spacing pull-right btn btn-small btn-default'><i class='fa fa-plus'></i></span></span></li>");
             $(newEffectNode).click(function() {
                 var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=200, height=300");
             });
-            $("#effects-menu-list").append(newEffectNode);
+            $("#effects-menu-list-new").html(newEffectNode);
         };
 
         function inflateTemplate(template, params) {
