@@ -45,8 +45,6 @@
 		window.transport = new window.Transport();
 		transport.togglePlayPause();
 
-<<<<<<< HEAD
-=======
         window.togglePlayPause = function() {
             window.transport.togglePlayPause();
             if (window.transport.playing) {
@@ -56,7 +54,6 @@
             }
         }
 
->>>>>>> 0a51eeb1e630b5a051d83fc18229eb8be115cba0
     document.addEventListener('keypress',function(deets){
         if(deets.charCode===32) window.togglePlayPause();
     });
