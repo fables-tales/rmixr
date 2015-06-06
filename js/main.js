@@ -42,8 +42,8 @@
         respondToHashChange();
     },100);
 
-		window.transport = new window.Transport();
-		transport.togglePlayPause();
+        window.transport = new window.Transport();
+        transport.togglePlayPause();
 
         window.togglePlayPause = function() {
             window.transport.togglePlayPause();
