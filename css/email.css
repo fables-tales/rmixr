@@ -1,6 +1,8 @@
 body {
-    background-color:rgb(38, 74, 96);
+    background-image:url("/img/bg.jpg");
+    background-size:cover;
     color:#fff;
+    background-position: 40% 40%;
 }
 
 #nav ul {
@@ -92,4 +94,44 @@ body {
     width:100%;
     bottom:0px;
     left:0px;
+}
+
+#list {
+      background: url(/img/corra_final.png) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      background-position: 20% 20%;
+      background-size:50% auto;
+      height:90vh;
+}
+
+.strip {
+    height: 94px;
+    background-color:#000;
+    border-bottom:1px solid rgba(0,0,0,0);
+}
+
+.strip-bass {
+    background-color:rgba(38, 74, 96, 0.5);
+}
+
+.strip-1 {
+    background-color:rgba(65, 120, 190, 0.5);
+}
+
+.strip-2 {
+    background-color:rgba(124, 199, 255, 0.5);
+}
+#main {
+    padding:0px;
+}
+
+.playhead {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:2px;
+    background-color:#fff;
 }

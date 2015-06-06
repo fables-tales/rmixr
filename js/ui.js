@@ -24,9 +24,21 @@ window.DawUI = (function() {
                         window.localStorage.setItem("update_effect", "");
                     }
 
-                    var amplitude = window.stripCollection.getAmplitude(window.currentChannelStrip);
-                    var height = amplitude*1000+10;
-                    $("#amplitude").height(height);
+                    if (window.currentChannelStrip) {
+                        var amplitude = window.stripCollection.getAmplitude(window.currentChannelStrip);
+                        var height = amplitude*1000+10;
+                        $("#amplitude").height(height);
+                    }
+
+                    $("#currentTime").text(window.transport.audioTime());
+
+                    var alongness = window.transport.audioTime()/window.transport.duration();
+                    var width = $("#main").width();
+                    $(".playhead").css({"left": width*alongness + "px"});
+                    if (window.transport.audioTime() >= window.transport.duration()) {
+                        window.transport.reset();
+                        $("#playPause").html("<i class='fa fa-play'></i>");
+                    }
                 },16);
             });
         }
@@ -131,7 +143,7 @@ window.DawUI = (function() {
 
             var newEffectNode = $("<li class='pure-menu-item'><span class='pure-menu-link'>New effect<span class='effect-edit effect-edit-spacing pull-right btn btn-small btn-default'><i class='fa fa-plus'></i></span></span></li>");
             $(newEffectNode).click(function() {
-                var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=200, height=300");
+                var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=600, height=400");
             });
             $("#effects-menu-list-new").html(newEffectNode);
         };
