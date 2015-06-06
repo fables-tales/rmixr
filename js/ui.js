@@ -80,7 +80,11 @@ window.DawUI = (function() {
         }
 
         function makeChannelLink(index, channel) {
-            var linkElement = $(inflateTemplate("channel", {"title": "Channel " + index}));
+            var linkElement = $(inflateTemplate("channel", {
+                "title": "Channel "+index,
+                "muted":channel.gain===0,
+                "muted-input-id":"muted-input-"+index
+            }));
 
             linkElement.click(function() {
                 $(".email-item-selected").each(function(i,e) {
@@ -91,6 +95,11 @@ window.DawUI = (function() {
                 showChannelStripSettings(index);
                 window.currentChannelStrip = index;
             });
+
+            $(linkElement.children()[1]).children()[0].click(function(){
+                channel.togglemute();                                    
+            });
+
             return linkElement;
         }
 
