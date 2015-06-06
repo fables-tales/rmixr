@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hi</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="/css/email.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>three band EQ</h1>
+        LOW - MID - HI
+        <BR \>
+        <div class="inputs" style="transform:rotate(-90deg);">
+            <input type="range" min="-100" max="0"  id="low-value">
+            <div class="low-value"></div>
+            <br />
+            <input type="range" min="-100" max="0"  id="mid-value">
+            <div class="mid-value"></div>
+            <br />
+            <input type="range" min="-100" max="0"  id="hi-value">
+            <div class="hi-value"></div>
+        </div>
+        <script src="/effect_templates/template_base.js"></script>
+        <script src="/effect_templates/threebandEQ.js"></script>
+    </body>
+</html>
