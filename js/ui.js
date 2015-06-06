@@ -88,7 +88,6 @@ window.DawUI = (function() {
 
             linkElement.click(function() {
                 $(".email-item-selected").each(function(i,e) {
-                    console.log(e);
                     $(e).removeClass("email-item-selected");
                 });
                 $(this).addClass("email-item-selected");
@@ -96,8 +95,11 @@ window.DawUI = (function() {
                 window.currentChannelStrip = index;
             });
 
-            $(linkElement.children()[1]).children()[0].click(function(){
-                channel.togglemute();                                    
+            linkElement.find('#muted-input-'+index).click(function(){
+                state = parseHash();
+                state.channels[index].notmuted = $(this).is(':checked');
+                console.log(state);
+                window.location.hash = JSON.stringify(state);
             });
 
             return linkElement;

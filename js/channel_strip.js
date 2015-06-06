@@ -11,7 +11,6 @@ window.ChannelStrip = (function() {
         var bufSize = 1;
 
         var gain = 1;
-        var muted = false;
 
         scriptNode.onaudioprocess = function(audioProcessingEvent) {
             // The input buffer is the song we loaded earlier
@@ -35,7 +34,6 @@ window.ChannelStrip = (function() {
 
                 rms = rms/inputBuffer.length;
                 rms = Math.sqrt(rms);
-
 
                 rmsValues.push(rms);
                 if (rmsValues.length > bufSize) {
@@ -75,6 +73,7 @@ window.ChannelStrip = (function() {
 
         this.updateState = function(newChannelState) {
             replaceEffects(newChannelState.effects);
+            newChannelState.notmuted?this.mute():this.unmute();
         };
 
         this.mute = function(){
@@ -83,12 +82,6 @@ window.ChannelStrip = (function() {
 
         this.unmute = function(){
             gain = 1;
-        }
-
-        this.togglemute = function(){
-            console.log('toggling mute');
-            muted?this.unmute():this.mute();
-            muted = !muted;
         }
 
         function disconnectAllEffects() {
