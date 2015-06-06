@@ -60,7 +60,8 @@ window.ChannelStrip = (function() {
 
         this.runChain = function(newSink) {
             sink = newSink;
-            source.connect(sink);
+            source.browserNode().connect(scriptNode);
+            scriptNode.connect(sink.browserNode());
         };
 
         this.pause = function() {
@@ -86,6 +87,7 @@ window.ChannelStrip = (function() {
 
         function disconnectAllEffects() {
             source.disconnect();
+            scriptNode.disconnect();
             for (var i = 0; i < effects.length; i++) {
                 effects[i].disconnect();
             }

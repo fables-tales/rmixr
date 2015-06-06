@@ -10,6 +10,8 @@
         <meta charset="utf-8">
     </head>
     <body>
+        <script type="text/javascript" src="js/tuna/tuna.js"></script>
+        <script type="text/javascript" src="js/fx/converb.js"></script>
         <script type="text/javascript" src="js/fx/stereo_pan.js"></script>
         <script type="text/javascript" src="js/fx/threeband_eq.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.0/mustache.js"></script>
@@ -57,8 +59,10 @@
                         <img src="img/derezzed_bass.png">
                     </div>
                     <div class="strip strip-1">
+                        <img src="img/derezzed_layer_1.png">
                     </div>
                     <div class="strip strip-2">
+                        <img src="img/derezzed_layer_2.png">
                     </div>
                 </div>
             </div>
@@ -67,8 +71,6 @@
                 <div class="email-item pure-g">
                     <div class="pure-u">
                         {{ title }}
-                    </div>
-                    <div class="pure-u-3-4">
                         <input type="checkbox" name="mute" id="{{muted-input-id}}" value="{{muted}}"/>
                     </div>
                 </div>
