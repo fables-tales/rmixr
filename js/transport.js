@@ -7,6 +7,18 @@ window.Transport = (function(){
             this.playing = !this.playing;
         }
 
+        this.pause = function() {
+            console.log("pausing");
+            this.playing = false;
+            stripCollection.pauseAll();
+        }
+
+        this.play = function() {
+            console.log("playing");
+            this.playing = true;
+            stripCollection.unpauseAll();
+        };
+
         this.audioTime = function() {
             return $("audio")[0].currentTime;
         };
@@ -15,15 +27,19 @@ window.Transport = (function(){
             return $("audio")[0].duration;
         }
 
+        this.setAudioTime = function(time) {
+            var audios = $("audio");
+            console.log(time);
+            for (var i = 0; i < audios.length; i++) {
+                var audio = audios[i];
+                audio.currentTime = time;
+            }
+        }
+
         this.reset = function() {
             stripCollection.pauseAll();
             that.playing = false;
-
-            var audios = $("audio");
-            for (var i = 0; i < audios.length; i++) {
-                var audio = audios[i];
-                audio.currentTime = 0;
-            }
+            that.setAudioTime(0);
         }
     }
 }());

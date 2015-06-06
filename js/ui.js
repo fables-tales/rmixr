@@ -5,6 +5,7 @@ window.DawUI = (function() {
         return state;
     }
     return function() {
+        window.headClicked = false;
         this.call = function() {
             $(document).ready(function() {
                 initUI();
@@ -32,9 +33,11 @@ window.DawUI = (function() {
 
                     $("#currentTime").text(window.transport.audioTime());
 
-                    var alongness = window.transport.audioTime()/window.transport.duration();
-                    var width = $("#main").width();
-                    $(".playhead").css({"left": width*alongness + "px"});
+                    if (!window.headClicked) {
+                        var alongness = window.transport.audioTime()/window.transport.duration();
+                        var width = $("#main").width();
+                        $(".playhead").css({"left": width*alongness + "px"});
+                    }
                     if (window.transport.audioTime() >= window.transport.duration()) {
                         window.transport.reset();
                         $("#playPause").html("<i class='fa fa-play'></i>");
@@ -68,6 +71,31 @@ window.DawUI = (function() {
                     $("#playPause").html("<i class='fa fa-play'></i>");
                 }
             });
+
+            $(".playhead").mousedown(function() {
+                window.headClicked = true;
+                window.transport.pause();
+            });
+
+            var newTime = 0;
+
+            $("#main").mousemove(function(e) {
+                if (window.headClicked) {
+                    var x = e.pageX;
+                    var boundaryLeft = $("#main").offset().left;
+                    var width = $("#main").width();
+                    var alongness = (x-boundaryLeft)/width;
+                    console.log("setting audio time");
+                    newTime = alongness*window.transport.duration();
+                    $(".playhead").css({"left": width*alongness});
+                }
+            });
+
+            $(".playhead").mouseup(function() {
+                window.headClicked = false;
+                window.transport.play();
+                setTimeout(function() { window.transport.setAudioTime(newTime); }, 16);
+            });
             renderState(parseHash());
         };
 
@@ -91,6 +119,7 @@ window.DawUI = (function() {
                 showChannelStripSettings(index);
                 window.currentChannelStrip = index;
             });
+
             return linkElement;
         }
 
