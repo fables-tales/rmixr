@@ -21,6 +21,10 @@ window.EffectsFactory = (function() {
             converb(source, sink, params.dry, params.wet);
         };
 
+        knownEffects.chorus = function(source, sink, params) {
+            chorus(source, sink, params.rate, params.feedback, params.delay);
+        };
+
         this.call = function(source, sink, effectState) {
             var effectFactory = knownEffects[effectState.name];
             effectFactory(source, sink, effectState.params);

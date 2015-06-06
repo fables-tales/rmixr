@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chorus</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/email.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="col-xs-12 text-center">
+                <h1>Chorus</h1>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">RATE</div>
+                                <input type="range" min="0" max="1000" class="vrange vmulti" id="rate-value">
+                                <div class="rate-value text-center"></div>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">FEEDBACK</div>
+                                <input type="range" min="0" max="100" class="vrange vmulti" id="feedback-value">
+                                <div class="feedback-value text-center"></div>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">DELAY</div>
+                                <input type="range" min="0" max="100" class="vrange vmulti" id="delay-value">
+                                <div class="delay-value text-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/effect_templates/template_base.js"></script>
+        <script src="/effect_templates/chorus.js"></script>
+    </body>
+</html>

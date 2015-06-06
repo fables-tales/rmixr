@@ -58,6 +58,14 @@
         sendLocalStorageItem(nodeDetails);
     }
 
+    function sendAddChorusMessage(channel) {
+        var nodeDetails = {
+            effect: {"name": "chorus", "params": {"rate": 1.5, "feedback": 0.2, "delay":0.0045}},
+            channel: channel
+        };
+        sendLocalStorageItem(nodeDetails);
+    }
+
     $(document).ready(function() {
         var channel = parseInt(QueryString.channel);
         $("#gain").click(function() {
@@ -77,6 +85,11 @@
 
         $("#converb").click(function(){
             sendAddReverbMessage(channel);
+            close();
+        });
+
+        $("#chorus").click(function(){
+            sendAddChorusMessage(channel);
             close();
         });
     });
