@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Three Band EQ</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/email.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="col-xs-12 text-center">
+                <h1>three band EQ</h1>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">LO</div>
+                                <input type="range" min="-100" max="100" class="vrange vmulti" id="low-value">
+                                <div class="low-value text-center"></div>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">MID</div>
+                                <input type="range" min="-100" max="100" class="vrange vmulti" id="mid-value">
+                                <div class="mid-value text-center"></div>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div class="text-center">HI</div>
+                                <input type="range" min="-100" max="100" class="vrange vmulti" id="hi-value">
+                                <div class="hi-value text-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/effect_templates/template_base.js"></script>
+        <script src="/effect_templates/threebandEQ.js"></script>
+    </body>
+</html>
