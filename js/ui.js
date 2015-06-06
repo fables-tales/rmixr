@@ -64,12 +64,7 @@ window.DawUI = (function() {
 
         function initUI() {
             $("#playPause").click(function() {
-                window.transport.togglePlayPause();
-                if (window.transport.playing) {
-                    $("#playPause").html("<i class='fa fa-pause'></i>");
-                } else {
-                    $("#playPause").html("<i class='fa fa-play'></i>");
-                }
+                window.togglePlayPause();
             });
 
             $("#main").mousedown(function() {
