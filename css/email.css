@@ -1,6 +1,8 @@
 body {
-    background-color:rgb(38, 74, 96);
+    background-image:url("/img/bg.jpg");
+    background-size:cover;
     color:#fff;
+    background-position: 40% 40%;
 }
 
 #nav ul {
@@ -88,4 +90,15 @@ body {
     width:100%;
     bottom:0px;
     left:0px;
+}
+
+#list {
+      background: url(/img/corra_final.png) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      background-position: 20% 20%;
+      background-size:50% auto;
+      height:90vh;
 }
