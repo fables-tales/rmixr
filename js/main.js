@@ -34,6 +34,7 @@
 
 
     window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    window.tuna = new Tuna(window.audioContext);
     window.stripCollection = ChannelStripCollection.factory(samples);
     stripCollection.startAll(new BrowserAudioSink(audioContext.destination));
 
@@ -43,10 +44,10 @@
 
 		window.transport = new window.Transport();
 		transport.togglePlayPause();
-    
+
     document.addEventListener('keypress',function(deets){
         if(deets.charCode===32) transport.togglePlayPause();
     });
-    
+
     new DawUI().call();
 })();
