@@ -2,7 +2,8 @@
     $(document).ready(function() {
         var params = JSON.parse(window.location.hash.substring(1));
         var currentValue = (params.gain*100.0).toFixed(2);
-        $("#multiply").val();
+        console.log("setting to " + currentValue);
+        $("#multiply").val(currentValue);
         var previousValue = currentValue;
         setInterval(function() {
             var value = $("#multiply").val()/100.0;

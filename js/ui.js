@@ -40,6 +40,7 @@ window.DawUI = (function() {
             var state = parseHash();
             state.channels[channel].effects.push(message.effect);
             window.location.hash = JSON.stringify(state);
+            showChannelStripSettings(channel);
         }
 
         function initUI() {
@@ -84,7 +85,7 @@ window.DawUI = (function() {
             $("#effects-menu-list").empty();
             for (var i = 0; i < effects.length; i++) {
                 var effect = effects[i];
-                var link = $("<li class='pure-menu-item'><span class='pure-menu-link'>" + effect.name + "<span class='effect-edit' id='effect-edit-" + channelIndex + '-' + i + "'><i class='fa fa-pencil'></i></span></span></li>");
+                var link = $("<li class='pure-menu-item'><span class='pure-menu-link'>" + effect.name + "<span class='effect-edit pull-right btn btn-small btn-default' id='effect-edit-" + channelIndex + '-' + i + "'><i class='fa fa-pencil'></i></span></span></li>");
                 setupEffectEditHandler(link, channelIndex, i);
                 $("#effects-menu-list").append(link);
             }
