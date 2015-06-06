@@ -31,16 +31,16 @@ window.DawUI = (function() {
                         $("#amplitude").height(height);
                     }
 
-                    $("#currentTime").text(window.transport.audioTime());
+                    function movePlayHead(n) {
+                        var alongness = window.transport.audioTime(n)/window.transport.duration(n);
+                        var width = $("#main").width();
+                        $(".playhead-" + (n+1)).css({"left": width*alongness + "px"});
+                    }
 
                     if (!window.headClicked) {
-                        var alongness = window.transport.audioTime()/window.transport.duration();
-                        var width = $("#main").width();
-                        $(".playhead").css({"left": width*alongness + "px"});
-                    }
-                    if (window.transport.audioTime() >= window.transport.duration()) {
-                        window.transport.reset();
-                        $("#playPause").html("<i class='fa fa-play'></i>");
+                        for (var i = 0; i < window.parseHash().channels.length; i++) {
+                            movePlayHead(i);
+                        }
                     }
                 },16);
             });
@@ -67,32 +67,53 @@ window.DawUI = (function() {
                 window.togglePlayPause();
             });
 
-            $("#main").mousedown(function() {
-                window.headClicked = true;
-                window.transport.pause();
-            });
+            setupClickDragHandler(0, ".strip-bass");
+            setupClickDragHandler(1, ".strip-1");
+            setupClickDragHandler(2, ".strip-2");
 
-            var newTime = 0;
+            renderState(parseHash());
+        };
 
-            $("#main").mousemove(function(e) {
-                if (window.headClicked) {
+        var allNodes = [];
+
+        window.removeNode = function() {
+            allNodes[0].hide();
+            allNodes.shift();
+        }
+
+        function setupClickDragHandler(channelIndex, selector) {
+            var node = null;
+            $(selector).mousedown(function(e) {
+                if (node == null) {
+                    node = $("<div class='selection'></div>");
                     var x = e.pageX;
                     var boundaryLeft = $("#main").offset().left;
-                    var width = $("#main").width();
-                    var alongness = (x-boundaryLeft)/width;
-                    console.log("setting audio time");
-                    newTime = alongness*window.transport.duration();
-                    $(".playhead").css({"left": width*alongness});
+                    var xOffset = x-boundaryLeft;
+                    $(node).css({"left": xOffset, "top": 94*channelIndex});
+                    $(selector).append(node);
+                } else {
+                    var state = window.parseHash();
+                    var boundaryLeft = $("#main").offset().left;
+                    var left = $(node).offset().left-boundaryLeft;
+                    var width = $(node).width();
+                    var start = left/$("#main").width() * window.transport.duration(channelIndex);
+                    var end = (left+width)/$("#main").width() * window.transport.duration(channelIndex);
+                    state.channels[channelIndex].loopPoints.push(start);
+                    state.channels[channelIndex].loopPoints.push(end);
+                    state.channels[channelIndex].loopPoints.push(0);
+                    allNodes.push(node);
+                    node = null;
+                    window.location.hash = JSON.stringify(state);
                 }
             });
 
-            $("#main").mouseup(function() {
-                window.headClicked = false;
-                window.transport.play();
-                setTimeout(function() { window.transport.setAudioTime(newTime); }, 16);
+            $(selector).mousemove(function(e) {
+                if (node) {
+                    var x = e.pageX;
+                    $(node).css({"width": x-$(node).offset().left});
+                }
             });
-            renderState(parseHash());
-        };
+        }
 
         function renderState(state) {
             var channels = state.channels;

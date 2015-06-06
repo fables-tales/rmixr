@@ -128,10 +128,34 @@ body {
     padding:0px;
 }
 
-.playhead {
+.playhead-1 {
     position:absolute;
-    top:0;
-    bottom:0;
+    top:0px;
+    height:94px;
     width:8px;
     background-color:#fff;
+}
+
+.playhead-2 {
+    position:absolute;
+    top:94px;
+    height:94px;
+    width:8px;
+    background-color:#fff;
+}
+
+.playhead-3 {
+    position:absolute;
+    top:188px;
+    height:94px;
+    width:8px;
+    background-color:#fff;
+}
+
+.selection {
+    position:absolute;
+    height:94px;
+    background-color:rgba(255,255,255,0.3);
+    z-index:1000;
+    width:30px;
 }

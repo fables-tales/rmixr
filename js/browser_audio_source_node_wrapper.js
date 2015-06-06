@@ -17,6 +17,26 @@ window.BrowserAudioSourceNodeWrapper = (function() {
             that.browserNode().mediaElement.play();
         }
 
+        this.duration = function() {
+            return that.browserNode().mediaElement.duration;
+        }
+
+        this.setCurrentTime = function(time) {
+            that.browserNode().mediaElement.currentTime = time;
+        }
+
+        this.currentTime = function() {
+            return that.browserNode().mediaElement.currentTime;
+        }
+
+        this.mute = function() {
+            return that.browserNode().mediaElement.volume = 0;
+        }
+
+        this.unmute = function() {
+            return that.browserNode().mediaElement.volume = 1.0;
+        }
+
 				this.pause = function(){
 						that.browserNode().mediaElement.pause();
 				}

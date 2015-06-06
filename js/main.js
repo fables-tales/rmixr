@@ -25,7 +25,7 @@
     if (window.location.hash == "") {
         var json = {"channels": []};
         for (var i = 0; i < samples.length; i++) {
-            json.channels.push({effects: []});
+            json.channels.push({effects: [], loopPoints: []});
         }
 
         window.location.hash = JSON.stringify(json);

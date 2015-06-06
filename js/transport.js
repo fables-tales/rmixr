@@ -19,12 +19,12 @@ window.Transport = (function(){
             stripCollection.unpauseAll();
         };
 
-        this.audioTime = function() {
-            return $("audio")[0].currentTime;
+        this.audioTime = function(n) {
+            return $("audio")[n].currentTime;
         };
 
-        this.duration = function() {
-            return $("audio")[0].duration;
+        this.duration = function(n) {
+            return $("audio")[n].duration;
         }
 
         this.setAudioTime = function(time) {

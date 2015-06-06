@@ -1,8 +1,10 @@
 window.ChannelStrip = (function() {
-    return function() {
+    return function(loopCallBack) {
         var source = null;
         var sink = null;
         var effects = [];
+        var loopPoints = [];
+
         var effectsFactory = new EffectsFactory(window.audioContext);
         var scriptNode = window.audioContext.createScriptProcessor(4096, 1, 1);
 
@@ -12,9 +14,35 @@ window.ChannelStrip = (function() {
 
         var gain = 1;
 
+
+        var currentLoopPoint = null;
+
+
         scriptNode.onaudioprocess = function(audioProcessingEvent) {
             // The input buffer is the song we loaded earlier
             var inputBuffer = audioProcessingEvent.inputBuffer;
+
+            if (currentLoopPoint == null && loopPoints.length >= 3) {
+                currentLoopPoint = [loopPoints[0], loopPoints[1], loopPoints[2]];
+                source.setCurrentTime(currentLoopPoint[0]);
+                loopPoints.shift();
+                loopPoints.shift();
+                loopPoints.shift();
+                loopCallBack(loopPoints);
+            } else if (currentLoopPoint != null) {
+                var ct = source.currentTime();
+                if (ct >= currentLoopPoint[1] && ct <= currentLoopPoint[1] + currentLoopPoint[2]) {
+                    gain = 0;
+                    console.log("muting");
+                    console.log(currentLoopPoint);
+                } else if (ct >= currentLoopPoint[1] + currentLoopPoint[2]) {
+                    console.log(currentLoopPoint);
+                    console.log("done");
+                    currentLoopPoint = null;
+                    gain = 1;
+                    window.removeNode();
+                }
+            }
 
             // The output buffer contains the samples that will be modified and played
             var outputBuffer = audioProcessingEvent.outputBuffer;
@@ -74,6 +102,7 @@ window.ChannelStrip = (function() {
 
         this.updateState = function(newChannelState) {
             replaceEffects(newChannelState.effects);
+            loopPoints = newChannelState.loopPoints;
             newChannelState.notmuted?this.mute():this.unmute();
         };
 

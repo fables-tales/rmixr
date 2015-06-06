@@ -62,16 +62,25 @@ window.ChannelStripCollection = (function() {
             return channelStrips[channel].getAmplitude();
         }
 
+        function makeChannelStrip(build, audiosources, i) {
+            var cs = new ChannelStrip(function(newLoopPoints) {
+                var state = window.parseHash();
+                state.channels[i].loopPoints = newLoopPoints;
+                window.location.hash = JSON.stringify(state);
+            });
+            cs.setSource(new BrowserAudioSourceNodeWrapper(audioSources[i]));
+            build.push(cs);
+        }
+
         function makeChannelStripsFromSources(audioSources) {
             var build = [];
             for (var i = 0; i < audioSources.length; i++) {
-                var cs = new ChannelStrip();
-                cs.setSource(new BrowserAudioSourceNodeWrapper(audioSources[i]));
-                build.push(cs);
+                makeChannelStrip(build, audioSources, i);
             }
 
             return build;
         };
+
     };
 }());
 
