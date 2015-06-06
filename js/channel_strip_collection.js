@@ -10,7 +10,7 @@ window.SampleCreator = (function() {
         function createAudioTags() {
             for (var i = 0; i < samples.length; i++) {
                 var id = "sample-" + i;
-                $("body").append('<audio src="' + samples[i] + '" id="'+ id + '">');
+                $("body").append('<audio src="' + samples[i] + '" id="'+ id + '" preload="true">');
                 tags.push($("#" + id)[0]);
             }
         }

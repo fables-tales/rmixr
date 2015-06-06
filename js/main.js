@@ -45,8 +45,20 @@
 		window.transport = new window.Transport();
 		transport.togglePlayPause();
 
+<<<<<<< HEAD
+=======
+        window.togglePlayPause = function() {
+            window.transport.togglePlayPause();
+            if (window.transport.playing) {
+                $("#playPause").html("<i class='fa fa-pause'></i>");
+            } else {
+                $("#playPause").html("<i class='fa fa-play'></i>");
+            }
+        }
+
+>>>>>>> 0a51eeb1e630b5a051d83fc18229eb8be115cba0
     document.addEventListener('keypress',function(deets){
-        if(deets.charCode===32) transport.togglePlayPause();
+        if(deets.charCode===32) window.togglePlayPause();
     });
 
     new DawUI().call();

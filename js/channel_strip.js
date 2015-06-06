@@ -10,6 +10,8 @@ window.ChannelStrip = (function() {
 
         var bufSize = 1;
 
+        var gain = 1;
+
         scriptNode.onaudioprocess = function(audioProcessingEvent) {
             // The input buffer is the song we loaded earlier
             var inputBuffer = audioProcessingEvent.inputBuffer;
@@ -27,12 +29,11 @@ window.ChannelStrip = (function() {
                 // Loop through the 4096 samples
                 for (var sample = 0; sample < inputBuffer.length; sample++) {
                     rms += inputData[sample] * inputData[sample];
-                    outputData[sample] = inputData[sample];
+                    outputData[sample] = gain * inputData[sample];
                 }
 
                 rms = rms/inputBuffer.length;
                 rms = Math.sqrt(rms);
-
 
                 rmsValues.push(rms);
                 if (rmsValues.length > bufSize) {
@@ -59,7 +60,8 @@ window.ChannelStrip = (function() {
 
         this.runChain = function(newSink) {
             sink = newSink;
-            source.connect(sink);
+            source.browserNode().connect(scriptNode);
+            scriptNode.connect(sink.browserNode());
         };
 
         this.pause = function() {
@@ -72,10 +74,20 @@ window.ChannelStrip = (function() {
 
         this.updateState = function(newChannelState) {
             replaceEffects(newChannelState.effects);
+            newChannelState.notmuted?this.mute():this.unmute();
         };
+
+        this.mute = function(){
+            gain = 0;
+        }
+
+        this.unmute = function(){
+            gain = 1;
+        }
 
         function disconnectAllEffects() {
             source.disconnect();
+            scriptNode.disconnect();
             for (var i = 0; i < effects.length; i++) {
                 effects[i].disconnect();
             }

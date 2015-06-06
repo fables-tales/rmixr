@@ -5,6 +5,7 @@ window.DawUI = (function() {
         return state;
     }
     return function() {
+        window.headClicked = false;
         this.call = function() {
             $(document).ready(function() {
                 initUI();
@@ -32,9 +33,11 @@ window.DawUI = (function() {
 
                     $("#currentTime").text(window.transport.audioTime());
 
-                    var alongness = window.transport.audioTime()/window.transport.duration();
-                    var width = $("#main").width();
-                    $(".playhead").css({"left": width*alongness + "px"});
+                    if (!window.headClicked) {
+                        var alongness = window.transport.audioTime()/window.transport.duration();
+                        var width = $("#main").width();
+                        $(".playhead").css({"left": width*alongness + "px"});
+                    }
                     if (window.transport.audioTime() >= window.transport.duration()) {
                         window.transport.reset();
                         $("#playPause").html("<i class='fa fa-play'></i>");
@@ -61,12 +64,32 @@ window.DawUI = (function() {
 
         function initUI() {
             $("#playPause").click(function() {
-                window.transport.togglePlayPause();
-                if (window.transport.playing) {
-                    $("#playPause").html("<i class='fa fa-pause'></i>");
-                } else {
-                    $("#playPause").html("<i class='fa fa-play'></i>");
+                window.togglePlayPause();
+            });
+
+            $("#main").mousedown(function() {
+                window.headClicked = true;
+                window.transport.pause();
+            });
+
+            var newTime = 0;
+
+            $("#main").mousemove(function(e) {
+                if (window.headClicked) {
+                    var x = e.pageX;
+                    var boundaryLeft = $("#main").offset().left;
+                    var width = $("#main").width();
+                    var alongness = (x-boundaryLeft)/width;
+                    console.log("setting audio time");
+                    newTime = alongness*window.transport.duration();
+                    $(".playhead").css({"left": width*alongness});
                 }
+            });
+
+            $("#main").mouseup(function() {
+                window.headClicked = false;
+                window.transport.play();
+                setTimeout(function() { window.transport.setAudioTime(newTime); }, 16);
             });
             renderState(parseHash());
         };
@@ -80,17 +103,28 @@ window.DawUI = (function() {
         }
 
         function makeChannelLink(index, channel) {
-            var linkElement = $(inflateTemplate("channel", {"title": "Channel " + index}));
+            var linkElement = $(inflateTemplate("channel", {
+                "title": "Channel "+index,
+                "muted":channel.gain===0,
+                "muted-input-id":"muted-input-"+index
+            }));
 
             linkElement.click(function() {
                 $(".email-item-selected").each(function(i,e) {
-                    console.log(e);
                     $(e).removeClass("email-item-selected");
                 });
                 $(this).addClass("email-item-selected");
                 showChannelStripSettings(index);
                 window.currentChannelStrip = index;
             });
+
+            linkElement.find('#muted-input-'+index).click(function(){
+                state = parseHash();
+                state.channels[index].notmuted = $(this).is(':checked');
+                console.log(state);
+                window.location.hash = JSON.stringify(state);
+            });
+
             return linkElement;
         }
 
