@@ -124,6 +124,19 @@ body {
 .strip-2 {
     background-color:rgba(124, 199, 255, 0.5);
 }
+
+.strip-3 {
+    background-color:rgba(38, 74, 96, 0.5);
+}
+
+.strip-4 {
+    background-color:rgba(124, 199, 255, 0.5);
+}
+
+.strip-5 {
+    background-color:rgba(65, 120, 190, 0.5);
+}
+
 #main {
     padding:0px;
 }
@@ -147,6 +160,30 @@ body {
 .playhead-3 {
     position:absolute;
     top:188px;
+    height:94px;
+    width:8px;
+    background-color:#fff;
+}
+
+.playhead-4 {
+    position:absolute;
+    top:282px;
+    height:94px;
+    width:8px;
+    background-color:#fff;
+}
+
+.playhead-5 {
+    position:absolute;
+    top:376px;
+    height:94px;
+    width:8px;
+    background-color:#fff;
+}
+
+.playhead-6 {
+    position:absolute;
+    top:470px;
     height:94px;
     width:8px;
     background-color:#fff;
