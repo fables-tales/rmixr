@@ -164,7 +164,7 @@ window.DawUI = (function() {
                 var state = parseHash();
                 var effectType = state.channels[channel].effects[effectIndex].name;
                 var effectParams = state.channels[channel].effects[effectIndex].params;
-                window.open("/effect_templates/" + effectType + ".html?channel=" + channel + "&position=" + effectIndex + "#" + JSON.stringify(effectParams), "MsgWindow" + Math.random(), "width=600, height=400");
+                window.open(".//effect_templates/" + effectType + ".html?channel=" + channel + "&position=" + effectIndex + "#" + JSON.stringify(effectParams), "MsgWindow" + Math.random(), "width=600, height=400");
             });
             link.find(".btn-remove").click(function() {
                 var state = parseHash();
@@ -208,7 +208,7 @@ window.DawUI = (function() {
 
             var newEffectNode = $("<li class='pure-menu-item'><span class='pure-menu-link'>New effect<span class='effect-edit effect-edit-spacing pull-right btn btn-small btn-default'><i class='fa fa-plus'></i></span></span></li>");
             $(newEffectNode).click(function() {
-                var myWindow = window.open("/menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=600, height=400");
+                var myWindow = window.open("./menu.html?channel=" + channelIndex, "MsgWindow" + Math.random(), "width=600, height=400");
             });
             $("#effects-menu-list-new").html(newEffectNode);
         };
