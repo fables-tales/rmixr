@@ -26,6 +26,7 @@
         <script type="text/javascript" src="./js/transport.js"></script>
         <script type="text/javascript" src="./js/ui.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/tweet.js"></script>
         <div id="layout" class="container-fluid">
             <div class="row top">
                 <div class="col-md-12">
@@ -33,6 +34,11 @@
                         <div class="col-md-2 col-md-offset-3">
                             <span id="playPause"><i class="fa fa-pause"></i></span>
                             <span id="currentTime"></span>
+                            <div id="tweet-button"></div>
+                            <script type="text/template" id="template-tweet-button">
+                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="Can you beat my mix? {{url}}" data-via="funandplausible" data-hashtags="rmixr">Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                            </script>
                         </div>
                     </div>
                 </div>
