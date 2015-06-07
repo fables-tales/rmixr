@@ -159,3 +159,7 @@ body {
     z-index:1000;
     width:30px;
 }
+
+#main img {
+    width:100%;
+}

@@ -81,6 +81,15 @@ window.DawUI = (function() {
             allNodes.shift();
         }
 
+        function alignToNextBeat(time) {
+            var beats = window.echonest.beats;
+            for (var i = 0; i < beats.length; i++) {
+                if (beats[i].start > time) {
+                    return beats[i].start;
+                }
+            }
+        }
+
         function setupClickDragHandler(channelIndex, selector) {
             var node = null;
             $(selector).mousedown(function(e) {
@@ -96,11 +105,12 @@ window.DawUI = (function() {
                     var boundaryLeft = $("#main").offset().left;
                     var left = $(node).offset().left-boundaryLeft;
                     var width = $(node).width();
-                    var start = left/$("#main").width() * window.transport.duration(channelIndex);
-                    var end = (left+width)/$("#main").width() * window.transport.duration(channelIndex);
+                    var start = alignToNextBeat(left/$("#main").width() * window.transport.duration(channelIndex));
+                    var end = alignToNextBeat((left+width)/$("#main").width() * window.transport.duration(channelIndex));
                     state.channels[channelIndex].loopPoints.push(start);
                     state.channels[channelIndex].loopPoints.push(end);
                     state.channels[channelIndex].loopPoints.push(0);
+                    $(node).css({"left": start/window.transport.duration*$("#main").width(), "width": (end-start)/window.transport.duration*$("#main").width()});
                     allNodes.push(node);
                     node = null;
                     window.location.hash = JSON.stringify(state);
