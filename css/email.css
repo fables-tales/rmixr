@@ -1,5 +1,5 @@
 body {
-    background-image:url("../img/bg.jpg");
+    background-image:url("../img/queen_freddie_mercury_wallpaper.jpg");
     background-size:cover;
     color:#fff;
     background-position: 40% 40%;
@@ -97,13 +97,6 @@ body {
 }
 
 #list {
-      background: url(../img/corra_final.png) no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      background-position: 20% 20%;
-      background-size:50% auto;
       height:90vh;
 }
 
