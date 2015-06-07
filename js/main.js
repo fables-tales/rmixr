@@ -17,9 +17,12 @@
     };
 
     var samples = [
-        "source_audio/derezzed_bass.mp3",
-        "source_audio/derezzed_layer_1.mp3",
-        "source_audio/derezzed_layer_2.mp3",
+        "source_audio/Dont_Stop_Me_Now_drums.mp3",
+        "source_audio/Dont_Stop_Me_Now_Bass.mp3",
+        "source_audio/Dont_Stop_Me_Now_Guitar.mp3",
+        "source_audio/Dont_Stop_Me_Now_Piano.mp3",
+        "source_audio/Dont_Stop_Me_Now_Backing_Vocals.mp3",
+        "source_audio/Dont_Stop_Me_Now_Lead_Vocals.mp3",
     ];
 
     if (window.location.hash == "") {
