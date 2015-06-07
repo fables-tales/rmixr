@@ -34,6 +34,7 @@
 
 
     window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    window.tuna = new Tuna(window.audioContext);
     window.stripCollection = ChannelStripCollection.factory(samples);
     stripCollection.startAll(new BrowserAudioSink(audioContext.destination));
 
@@ -41,8 +42,8 @@
         respondToHashChange();
     },100);
 
-		window.transport = new window.Transport();
-		transport.togglePlayPause();
+        window.transport = new window.Transport();
+        transport.togglePlayPause();
 
         window.togglePlayPause = function() {
             window.transport.togglePlayPause();

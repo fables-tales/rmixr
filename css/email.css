@@ -1,5 +1,5 @@
 body {
-    background-image:url("/img/bg.jpg");
+    background-image:url("../img/bg.jpg");
     background-size:cover;
     color:#fff;
     background-position: 40% 40%;
@@ -97,7 +97,7 @@ body {
 }
 
 #list {
-      background: url(/img/corra_final.png) no-repeat center center fixed;
+      background: url(../img/corra_final.png) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;

@@ -50,6 +50,22 @@
         sendLocalStorageItem(nodeDetails);
     }
 
+    function sendAddReverbMessage(channel) {
+        var nodeDetails = {
+            effect: {"name": "converb", "params": {"dry": 0.5, "wet": 0.5}},
+            channel: channel
+        };
+        sendLocalStorageItem(nodeDetails);
+    }
+
+    function sendAddChorusMessage(channel) {
+        var nodeDetails = {
+            effect: {"name": "chorus", "params": {"rate": 1.5, "feedback": 0.2, "delay":0.0045}},
+            channel: channel
+        };
+        sendLocalStorageItem(nodeDetails);
+    }
+
     $(document).ready(function() {
         var channel = parseInt(QueryString.channel);
         $("#gain").click(function() {
@@ -64,6 +80,16 @@
 
         $("#pan").click(function(){
             sendAddPanMessage(channel);
+            close();
+        });
+
+        $("#converb").click(function(){
+            sendAddReverbMessage(channel);
+            close();
+        });
+
+        $("#chorus").click(function(){
+            sendAddChorusMessage(channel);
             close();
         });
     });
