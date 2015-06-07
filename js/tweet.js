@@ -19,6 +19,7 @@
                 var url = response.id;
                 $("#tweet-button").empty();
                 $("#tweet-button").html(inflateTemplate("tweet-button", {"url": url}));
+                window.twttr.widgets.load();
             }
         });
     }
