@@ -1,7 +1,7 @@
 window.DawUI = (function() {
     window.parseHash = function() {
         var hash = window.location.hash;
-        var state = JSON.parse(hash.substring(1));
+        var state = JSON.parse(decodeURIComponent(hash.substring(1)));
         return state;
     }
     return function() {
