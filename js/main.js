@@ -59,4 +59,8 @@
     });
 
     new DawUI().call();
+
+    if(document.location.host.indexOf('localhost')<0){
+        document.body.appendChild(document.createElement('<script type="text/template" id="template-tweet-button"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Can you beat my mix? {{url}}" data-via="funandplausible" data-hashtags="rmixr">Tweet</a></script>'));
+    }
 })();
